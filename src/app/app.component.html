@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand navigation-hover light" href="/">{{blogTitle}}</a>
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -11,9 +11,9 @@
         <li class="nav-item">
             <a class="nav-link navigation-hover" href="/?page=archives">Archives</a>
         </li>
-        <!--<li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link navigation-hover" href="/?page=editor">Editor</a>
-        </li>-->
+        </li>
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -21,6 +21,10 @@
             </li>
         </ul>
     </div>
-</nav>
+</nav> -->
 
-<router-outlet></router-outlet>
+<app-navigation></app-navigation>
+
+<div class="body-container">
+    <router-outlet></router-outlet>
+</div>
