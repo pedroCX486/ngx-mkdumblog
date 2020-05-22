@@ -1,0 +1,16 @@
+<div class="card margins" *ngFor="let content of contents">
+    <h4 class="card-header">
+        <a href="/?post={{content.filename}}">{{content.postTitle}}</a>
+        <div class="timestamp text-muted" *ngIf="!!content.timestamp">
+            <strong>Posted on</strong>&nbsp;{{parseTimestamp(content.timestamp)}}
+        </div>
+        <div class="timestamp text-muted" *ngIf="!!content.editedTimestamp">
+            <strong>Edited on</strong>&nbsp;{{parseTimestamp(content.editedTimestamp)}}
+        </div>
+    </h4>
+    <div class="card-body">
+        <p class="card-text" [innerHTML]="content.postContent"></p>
+    </div>
+</div>
+
+<a href="/?page=archives"><button type="button" class="text-center margins-sides margin-y btn btn-primary btn-block">Want to read more? Check the archives.</button></a>
