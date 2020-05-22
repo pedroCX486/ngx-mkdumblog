@@ -1,6 +1,8 @@
-# ngx-mkdumblog
+# WIP: ngx-mkdumblog
 
-The new version of [Dumblog](https://github.com/pedroCX486/dumblog), now fully written in Angular and with Markdown support! This version brings a fresh new code to the table. I always thought that the idea of having a local editor was neat, but not really usable for Linux/Mac users (especially me, that own an Linux machine too). So now you have an full-fledged editor online (just for editing, it can't save the files to your repo), customization on the configs.json and a few things more.
+This project is still a work in progress and broken, not ready for daily usage. Text in the readme doesn't reflect current development state.
+
+The new version of [ngx-dumblog](https://github.com/pedroCX486/ngx-dumblog), now with Markdown support! Now you have an full-fledged markdown editor online (just for editing, it can't save the files to your repo), with customization on the configs.json, lightweight size (no bootstrap!) and much more!
 
 ## Customizations
 
