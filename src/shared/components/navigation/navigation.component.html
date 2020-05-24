@@ -1,8 +1,13 @@
 <div class="topnav">
-    <a class="no-focus" href="/">Brand</a>
-    <a href="/">Home</a>
-    <a href="/?page=archives">Archives</a>
+    <a class="no-focus" href="/">{{settings.blogTitle}}</a>
+    <a href="/" [class.active]="isCurrentPage('/blog')">Home</a>
+    <a href="/?page=archives" [class.active]="isCurrentPage('/blog/archives')">Archives</a>
+    <a href="/?page=editor" [class.active]="isCurrentPage('/editor')">Editor</a>
     <a href="javascript:void(0);" class="icon" (click)="openMenu()">
         ☰
+    </a>
+
+    <a class="right-align no-focus" href="http://github.com/pedroCX486/ngx-mkdumblog" target="_blank">
+        Powered by ngx-mkdumblog
     </a>
 </div>

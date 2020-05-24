@@ -1,24 +1,26 @@
-<div class="container header-margin-top">
-    <div class="jumbotron">
-        <h1 class="display-4">Archives</h1>
-        <p class="lead">Here you can find all the blog's posts.</p>
-    </div>
+<div class="placard">
+    <div class="placard-title">Archives</div>
+    <div class="placard-text">Here you can find all the blog's posts.</div>
 </div>
 
-<div class="input-group mb-3 search-box">
-    <input type="text" class="form-control" id="search" placeholder="Search by title" (keyup)="searchArhive($event.target.value)">
-    <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchArhive(null, true);">Clear</button>
-    </div>
+<div class="text-center">
+    <input type="text" class="form-control" placeholder="Search by title" id="search"
+        (keyup)="searchArhive($event.target.value)">
+    &nbsp;
+    <button class="btn-gray" type="button" (click)="searchArhive(null, true);">Clear</button>
 </div>
 
-<div class="card margins" *ngIf="filteredArchives.length > 0">
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item mouse-hover" *ngFor="let archive of filteredArchives">
-            <a href="/?post={{archive.filename}}">{{archive.postTitle}}</a>
+<div class="card" *ngIf="filteredArchives.length > 0">
+    <div class="list-group">
+        <div class="mouse-hover list-item" *ngFor="let archive of filteredArchives">
+            <a class="title" href="/?post={{archive.filename}}">{{archive.postTitle}}</a>
             <div class="timestamp" *ngIf="!!archive.timestamp">{{parseTimestamp(archive.timestamp)}}</div>
-        </li>
-    </ul>
+        </div>
+    </div>
 </div>
 
-<a href="/"><button type="button" class="margins-sides margin-y btn btn-primary btn-block">Go to Home</button></a>
+<div class="text-center">
+    <a href="/">
+        <button type="button" class="margins-sides margin-y btn-fat btn-blue">Go to Home</button>
+    </a>
+</div>

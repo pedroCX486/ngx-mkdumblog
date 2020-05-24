@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Settings } from '../../constants/settings'
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-navigation',
@@ -7,18 +10,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
 
-  constructor() { }
+  settings;
+
+  constructor(private router: Router) {
+    this.settings = Settings;
+  }
 
   ngOnInit(): void {
   }
 
-  openMenu() {
+  openMenu(): void  {
     var element = document.getElementsByClassName[0]("topnav");
     if (element.className === "topnav") {
       element.className += " responsive";
     } else {
       element.className = "topnav";
     }
+  }
+
+  isCurrentPage(url) : boolean {
+    return this.router.url === url;
   }
 
 }

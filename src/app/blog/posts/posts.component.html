@@ -1,39 +1,53 @@
 <div class="card margins">
-    <h4 class="card-header">
-        <a href="/?post={{content.filename}}">{{content.postTitle}}</a>
-        <div class="timestamp text-muted" *ngIf="content.draft"><strong>Draft: Post not published.</strong></div>
-
-        <div class="timestamp text-muted" *ngIf="!!content.timestamp"><strong>Posted on</strong>&nbsp;{{content.timestamp}}</div>
-        <div class="timestamp text-muted" *ngIf="!!content.editedTimestamp"><strong>Edited on</strong>&nbsp;{{content.editedTimestamp}}</div>
-    </h4>
-    <div class="card-body">
-        <p class="card-text" [innerHTML]="content.postContent"></p>
+  <h4 class="card-header">
+    <a class="title" href="/?post={{content.filename}}">{{content.postTitle}}</a>
+    <div class="timestamp" *ngIf="content.draft">
+      <strong>Draft: Post not published.</strong>
     </div>
+
+    <div class="timestamp" *ngIf="!!content.timestamp">
+      <strong>Posted on</strong>&nbsp;{{content.timestamp}}
+    </div>
+
+    <div class="timestamp" *ngIf="!!content.editedTimestamp">
+      <strong>Edited on</strong>&nbsp;{{content.editedTimestamp}}
+    </div>
+  </h4>
+  <div class="card-body">
+    <p class="card-text" [innerHTML]="content.postContent"></p>
+  </div>
 </div>
 
-<div class="container header-margin-top" *ngIf="!!configs">
-    <div class="jumbotron">
-        <div class="profile-box">
-            <div>
-                <img class="avatar" src="./assets/{{configs.avatar}}"><br>
-                <div class="social-networks">
-                    <a *ngIf="!!configs.facebook" href="{{configs.facebook}}"><img src="./assets/facebook.png"></a>
-                    <a *ngIf="!!configs.twitter" href="{{configs.twitter}}"><img src="./assets/twitter.png"></a>
-                    <a *ngIf="!!configs.instagram" href="{{configs.instagram}}"><img src="./assets/instagram.png"></a>
-                    <a *ngIf="!!configs.linkedin" href="{{configs.linkedin}}"><img src="./assets/linkedin.png"></a>
-                    <a *ngIf="!!configs.youtube" href="{{configs.youtube}}"><img src="./assets/youtube.png"></a>
-                </div>
-            </div>
-            <div>
-                <h1 class="display-4">{{configs.name}}</h1>
-                <p class="lead">{{configs.bio}}</p>
-            </div>
-        </div>
+<div class="placard" *ngIf="!!configs">
+  <div class="profile-box">
+    <div>
+      <img class="avatar" src="./assets/{{configs.avatar}}"><br>
+      <div class="social-networks">
+        <a *ngIf="!!configs.facebook" href="{{configs.facebook}}"><img src="./assets/facebook.png"></a>
+        <a *ngIf="!!configs.twitter" href="{{configs.twitter}}"><img src="./assets/twitter.png"></a>
+        <a *ngIf="!!configs.instagram" href="{{configs.instagram}}"><img src="./assets/instagram.png"></a>
+        <a *ngIf="!!configs.linkedin" href="{{configs.linkedin}}"><img src="./assets/linkedin.png"></a>
+        <a *ngIf="!!configs.youtube" href="{{configs.youtube}}"><img src="./assets/youtube.png"></a>
+      </div>
     </div>
+    <div class="container">
+      <div class="placard-title">{{configs.name}}</div>
+      <div class="placard-text">{{configs.bio}}</div>
+    </div>
+  </div>
 </div>
 <div class="comments" id="disqus_thread" *ngIf="configs?.enableDisqus"></div>
 
-<div class="margin-y">
-    <a href="/"><button type="button" class="margins-sides btn btn-primary btn-block">Go to Home</button></a>
-    <a href="/?page=archives"><button type="button" class="margin-top margins-sides btn btn-primary btn-block">Go to the Archives</button></a>
+<div class="margin-y text-center">
+  <a href="/">
+    <button type="button" class="margins-sides btn-blue btn-fat">Go to Home</button>
+  </a>
+
+  <br />
+
+  <a href="/?page=archives">
+    <button type="button" class="margin-top margins-sides btn-blue btn-fat">
+      Go to the Archives
+    </button>
+  </a>
 </div>
