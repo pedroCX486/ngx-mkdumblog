@@ -25,7 +25,7 @@ export class NavigationComponent implements OnInit {
   }
 
   openMenu(): void {
-    const element = document.getElementsByClassName[0]('topnav');
+    const element = document.getElementsByClassName('topnav')[0];
     if (element.className === 'topnav') {
       element.className += ' responsive';
     } else {
