@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { Settings } from '@shared/constants/settings';
 
 
 @Component({
@@ -13,14 +12,14 @@ import { Router } from '@angular/router';
 
 export class AppComponent implements OnInit {
 
+  settings = new Settings;
   urlParams = new URLSearchParams(window.location.search);
-  blogTitle;
 
-  constructor(private http: HttpClient, private titleService: Title, private router: Router) {
+  constructor(private titleService: Title, private router: Router) {
   }
 
   ngOnInit() {
-    this.setTitle();
+    this.titleService.setTitle(this.settings.blogTitle);
 
     if (this.urlParams.get('post')) {
       this.router.navigate(['/blog/posts'], { queryParams: { post: this.urlParams.get('post') }, skipLocationChange: true });
@@ -41,17 +40,6 @@ export class AppComponent implements OnInit {
 
   navigate(arg) {
     this.router.navigate([arg], { skipLocationChange: true });
-  }
-
-  setTitle() {
-    this.getJSON().subscribe(data => {
-      this.blogTitle = data.blogTitle;
-      this.titleService.setTitle(this.blogTitle);
-    });
-  }
-
-  getJSON(): Observable<any> {
-    return this.http.get('./assets/configs.json');
   }
 
 }

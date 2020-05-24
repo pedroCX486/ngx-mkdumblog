@@ -3,7 +3,7 @@ import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import { saveAs } from 'file-saver';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { PostModel } from 'src/app/models/post.model';
+import { PostModel } from '@shared/models/post.model';
 
 
 @Component({

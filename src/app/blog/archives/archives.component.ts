@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { ArchiveModel } from 'src/app/models/archive.model';
+import { ArchiveModel } from '@shared/models/archive.model';
 
 @Component({
   selector: 'app-archives',

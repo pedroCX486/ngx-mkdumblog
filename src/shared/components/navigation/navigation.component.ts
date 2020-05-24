@@ -10,10 +10,9 @@ import { Router } from '@angular/router';
 })
 export class NavigationComponent implements OnInit {
 
-  settings;
+  settings = Settings;
 
   constructor(private router: Router) {
-    this.settings = Settings;
   }
 
   ngOnInit(): void {

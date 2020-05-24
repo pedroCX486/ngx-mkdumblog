@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ConfigModel } from 'src/app/models/config.model';
-import { ArchiveModel } from 'src/app/models/archive.model';
-import { PostModel } from 'src/app/models/post.model';
+import { ArchiveModel } from '@shared/models/archive.model';
+import { PostModel } from '@shared/models/post.model';
+import { Settings } from '@shared/constants/settings';
+
 
 @Component({
   selector: 'app-home',
@@ -14,30 +15,25 @@ export class HomeComponent implements OnInit {
 
   contents: PostModel[] = [];
   archives: ArchiveModel[] = [];
-  configs: ConfigModel;
+  settings = Settings;
   postsLoaded = 0;
 
-  constructor(private http: HttpClient) { }
-
-  ngOnInit() {
-    this.loadConfigs();
+  constructor(private http: HttpClient) {
   }
 
-  loadConfigs() {
-    this.getJSON('./assets/configs.json').toPromise().then((data) => {
-      this.configs = data;
-    }).then(data => this.loadArchive());
+  ngOnInit() {
+    this.loadArchive();
   }
 
   loadArchive() {
     this.getJSON('./assets/posts/archive.json').toPromise().then(data => {
       this.archives = data;
-      this.configs.maxPosts = this.archives.length < this.configs.maxPosts ? this.archives.length : this.configs.maxPosts;
+      this.settings.maxPosts = this.archives.length < this.settings.maxPosts ? this.archives.length : this.settings.maxPosts;
     }).then(data => this.loadPosts());
   }
 
   loadPosts() {
-    if (this.postsLoaded < this.configs.maxPosts) {
+    if (this.postsLoaded < this.settings.maxPosts) {
       this.getJSON('./assets/posts/' + this.archives[this.postsLoaded].filename + '.json').toPromise().then(data => {
         this.contents.push(data);
       }).then(data => {

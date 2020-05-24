@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Title } from '@angular/platform-browser';
-import { PostModel } from 'src/app/models/post.model';
+import { PostModel } from '@shared/models/post.model';
+import { Settings } from '@shared/constants/settings';
+
 
 @Component({
   selector: 'app-posts',
@@ -12,24 +14,16 @@ import { PostModel } from 'src/app/models/post.model';
 export class PostsComponent implements OnInit {
 
   urlParams = new URLSearchParams(window.location.search);
-
   content: PostModel = new PostModel();
-  configs;
+  settings = new Settings;
 
-  constructor(private http: HttpClient, private titleService: Title) { }
+  constructor(private http: HttpClient, private titleService: Title) {
+  }
 
   ngOnInit() {
-    this.loadConfigs();
-
     if (this.urlParams.get('post')) {
       this.loadPost();
     }
-  }
-
-  loadConfigs() {
-    this.getJSON('./assets/configs.json').subscribe(data => {
-      this.configs = data;
-    });
   }
 
   loadPost() {
@@ -37,9 +31,9 @@ export class PostsComponent implements OnInit {
       this.content = data;
       this.content.timestamp = !!this.content.timestamp ? new Date(data.timestamp * 1000).toUTCString() : '';
       this.content.editedTimestamp = !!this.content.editedTimestamp ? new Date(data.editedTimestamp * 1000).toUTCString() : '';
-      this.titleService.setTitle(this.content.postTitle + ' - ' + this.configs.blogTitle);
+      this.titleService.setTitle(this.content.postTitle + ' - ' + this.settings.blogTitle);
     }).then(data => {
-      if (this.configs.enableDisqus) {
+      if (this.settings.enableDisqus) {
         this.loadDisqus();
       }
     }).catch(error => {
