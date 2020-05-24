@@ -25,6 +25,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.loadArchive();
+
     MicroModal.init();
   }
 
@@ -53,10 +54,12 @@ export class CanvasComponent implements OnInit, AfterViewInit {
 
   savePost(isDraft: boolean): void {
     this.content.draft = isDraft;
+    
+    this.content.postContent = this.simplemde.value();
 
     if (isDraft) {
       MicroModal.show('draftModal');
-    } else{
+    } else {
       MicroModal.show('saveModal');
     }
 

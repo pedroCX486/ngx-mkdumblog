@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 import { PostModel } from '@shared/models/post.model';
 import { SettingsModel } from '@shared/models/settings.model';
 import { HelperService } from '@shared/services/helper.service';
+import * as showdown from 'showdown';
 
 
 @Component({
@@ -17,10 +17,13 @@ export class PostsComponent implements OnInit {
   content: PostModel = new PostModel();
   settings: SettingsModel;
 
+  showdownmd;
+
   constructor(private titleService: Title, private helperService: HelperService) {
   }
 
   ngOnInit(): void {
+    this.showdownmd = new showdown.Converter();
     this.helperService.getConfigs().subscribe((data: SettingsModel) => this.settings = data);
 
     if (this.urlParams.get('post')) {
@@ -42,6 +45,10 @@ export class PostsComponent implements OnInit {
       this.content.postTitle = 'Whoops!';
       this.content.postContent = 'We couldn\'t load this post! <strong>(' + error.status + ' ' + error.statusText + ')</strong>';
     });
+  }
+
+  generateHTML(markdown: string): void {
+    return this.showdownmd.makeHtml(markdown);
   }
 
   loadDisqus(): void {

@@ -5,6 +5,7 @@ import { ArchiveModel } from '@shared/models/archive.model';
 import { PostModel } from '@shared/models/post.model';
 import { SettingsModel } from '@shared/models/settings.model';
 import { HelperService } from '@shared/services/helper.service';
+import * as showdown from 'showdown';
 
 @Component({
   selector: 'app-home',
@@ -18,10 +19,14 @@ export class HomeComponent implements OnInit {
   settings: SettingsModel;
   postsLoaded = 0;
 
+  showdownmd;
+
   constructor(private helperService: HelperService) {
   }
 
   ngOnInit(): void {
+    this.showdownmd = new showdown.Converter();
+    
     this.helperService.getConfigs().toPromise()
       .then((data: SettingsModel) => this.settings = data)
       .then(() => this.loadArchive());
@@ -57,6 +62,10 @@ export class HomeComponent implements OnInit {
 
     this.postsLoaded += 1;
     this.loadPosts();
+  }
+
+  generateHTML(markdown: string): void {
+    return this.showdownmd.makeHtml(markdown);
   }
 
   parseTimestamp(timestamp): string {
