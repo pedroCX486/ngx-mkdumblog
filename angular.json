@@ -29,6 +29,7 @@
             ],
             "styles": [
               "src/styles.scss",
+              "src/shared/styles/micromodal.scss",
               "node_modules/simplemde/dist/simplemde.min.css"
             ],
             "scripts": [
