@@ -1,177 +1,204 @@
 // Body sizing
 body {
-    margin-top: 4rem;
-    margin-left: 0.5em;
-    margin-right: 0.5em;
+  margin-top: 4rem;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
 }
 
 // Font
 html {
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
-        Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-    font-style: normal;
-    font-weight: normal;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-style: normal;
+  font-weight: normal;
 }
 
 // Animation
-*:not(.fade) {
-    -webkit-animation: fadein 0.5s;
-    animation: fadein 0.5s;
+*:not(.fade)::not(simplemde) {
+  -webkit-animation: fadein 0.5s;
+  animation: fadein 0.5s;
 }
 
 @keyframes fadein {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 //Margins
 .margins {
-    margin: 1rem;
+  margin: 1rem;
 }
+
 .header-margin-top {
-    margin-top: 2rem !important;
+  margin-top: 2rem !important;
 }
+
 .margins-sides {
-    width: 40%;
-    margin: 0 auto;
+  width: 40%;
+  margin: 0 auto;
 }
+
 .margin-top {
-    margin-top: 0.5rem !important;
+  margin-top: 0.5rem !important;
 }
+
 .margin-y {
-    margin-top: 2rem;
-    margin-bottom: 3rem;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
 }
 
 // Cards
 .card {
-    border: none;
+  border: none;
 }
 
 .card-header {
-    border-bottom: none;
-    border-radius: 5px;
-    background-color: rgb(240, 240, 240);
-    padding: 1rem;
+  border-bottom: none;
+  border-radius: 5px;
+  background-color: rgb(240, 240, 240);
+  padding: 1rem;
 }
 
 .title {
-    color: #007bff;
-    text-decoration: none;
-    font-size: 1.5rem;
-    font-weight: 500;
+  color: #007bff;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 500;
 }
 .timestamp {
-    color: #6c757d;
-    font-size: 12px;
+  color: #6c757d;
+  font-size: 12px;
 }
 
 .card-body {
-    padding-left: 1rem;
-    padding-right: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .card-text {
-    // Nothing yet.
+  // Nothing yet.
 }
 
 // Utils
 .text-center {
-    text-align: center;
+  text-align: center;
 }
 
 .mouse-hover:hover {
-    background-color: whitesmoke;
-    transition: all 0.3s ease-in-out;
+  background-color: whitesmoke;
+  transition: all 0.3s ease-in-out;
 }
 
 .container {
-    margin: 0 auto;
+  margin: 0 auto;
+}
+
+.size-fill {
+  width: -webkit-fill-available;
+}
+
+.flex {
+  display: flex;
+}
+
+.go-right{
+  margin-right: auto;
 }
 
 // Lists
 .list-group {
-    padding: 2rem;
+  padding: 2rem;
 }
 
 .list-item {
-    padding: 1rem;
-    border-radius: 5px;
-    border: whitesmoke solid 1px;
+  padding: 1rem;
+  border-radius: 5px;
+  border: whitesmoke solid 1px;
 }
 
 // Inputs
 input[type="text"],
 select,
 textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: vertical;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  min-width: 5%;
 }
 
 // Buttons
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 button:hover {
-    box-shadow: 3px 3px 5px lightgray;
-    transition: all 0.3s ease-in-out;
+  box-shadow: 3px 3px 5px lightgray;
+  transition: all 0.3s ease-in-out;
 }
 
 .btn-fat {
-    padding: 0.7rem !important;
+  padding: 0.7rem !important;
 }
 
 .btn-blue {
-    border-radius: 5px;
-    background-color: #007bff;
-    text-decoration: none;
-    padding: 0.6rem;
-    border: none;
-    color: white;
-    font-size: 1rem;
+  border-radius: 5px;
+  background-color: #007bff;
+  text-decoration: none;
+  padding: 0.6rem;
+  border: none;
+  color: white;
+  font-size: 1rem;
+}
+
+.btn-lightblue {
+  border-radius: 5px;
+  background-color: #17a2b8;
+  text-decoration: none;
+  padding: 0.6rem;
+  border: none;
+  color: white;
+  font-size: 1rem;
 }
 
 .btn-green {
-    border-radius: 5px;
-    background-color: #28a745;
-    text-decoration: none;
-    padding: 0.6rem;
-    border: none;
-    color: white;
-    font-size: 1rem;
+  border-radius: 5px;
+  background-color: #28a745;
+  text-decoration: none;
+  padding: 0.6rem;
+  border: none;
+  color: white;
+  font-size: 1rem;
 }
 
 .btn-gray {
-    border-radius: 5px;
-    background-color: #969696;
-    text-decoration: none;
-    padding: 0.6rem;
-    border: none;
-    color: white;
-    font-size: 1rem;
+  border-radius: 5px;
+  background-color: #969696;
+  text-decoration: none;
+  padding: 0.6rem;
+  border: none;
+  color: white;
+  font-size: 1rem;
 }
 
 // Clonotron
 .placard {
-    background-color: whitesmoke;
-    text-align: center;
-    padding: 2rem;
-    margin: 2rem;
-    margin-top: 5rem;
-    border-radius: 5px;
-    font-weight: 200;
-    font-size: 1.25rem;
+  background-color: whitesmoke;
+  text-align: center;
+  padding: 2rem;
+  margin: 2rem;
+  margin-top: 5rem;
+  border-radius: 5px;
+  font-weight: 200;
+  font-size: 1.25rem;
 }
 
 .placard-title {
-    font-weight: 200;
-    font-size: 3.5rem;
+  font-weight: 200;
+  font-size: 3.5rem;
 }

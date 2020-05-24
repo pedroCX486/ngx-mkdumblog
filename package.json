@@ -19,8 +19,12 @@
     "@angular/platform-browser": "~9.1.9",
     "@angular/platform-browser-dynamic": "~9.1.9",
     "@angular/router": "~9.1.9",
+    "@types/micromodal": "^0.3.1",
+    "@types/simplemde": "^1.11.7",
     "file-saver": "^2.0.2",
+    "micromodal": "^0.4.6",
     "rxjs": "~6.5.4",
+    "simplemde": "^1.11.2",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.3"
   },

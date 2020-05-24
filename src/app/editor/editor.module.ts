@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { EditorRoutingModule } from './editor-routing.module';
 import { CanvasComponent } from './canvas/canvas.component';
 
-
 @NgModule({
   declarations: [CanvasComponent],
   imports: [

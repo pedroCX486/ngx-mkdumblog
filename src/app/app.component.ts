@@ -21,8 +21,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
 
-    this.helperService.getConfigs().subscribe((data: SettingsModel) => this.settings = data);
-    this.titleService.setTitle(this.settings.blogTitle);
+    this.helperService.getConfigs().toPromise()
+      .then((data: SettingsModel) => this.settings = data)
+      .then(() => this.titleService.setTitle(this.settings.blogTitle));
 
     if (this.urlParams.get('post')) {
       this.router.navigate(['/blog/posts'], { queryParams: { post: this.urlParams.get('post') }, skipLocationChange: true });

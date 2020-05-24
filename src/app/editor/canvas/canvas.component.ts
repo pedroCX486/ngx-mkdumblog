@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 import { saveAs } from 'file-saver';
 import { PostModel } from '@shared/models/post.model';
 import { HelperService } from '@shared/services/helper.service';
+import * as SimpleMDE from 'simplemde';
+import MicroModal from 'micromodal';
 
 
 @Component({
@@ -9,22 +11,34 @@ import { HelperService } from '@shared/services/helper.service';
   templateUrl: './canvas.component.html',
   styleUrls: ['./canvas.component.scss']
 })
-export class CanvasComponent implements OnInit {
+export class CanvasComponent implements OnInit, AfterViewInit {
+
+  simplemde;
 
   content: PostModel = new PostModel();
   archives = [];
   filteredArchives = [];
   entryExists = false;
 
-  constructor(private helperService: HelperService) {
-    this.resetEditor();
+  constructor(private helperService: HelperService, private changeDetector: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
     this.loadArchive();
+    MicroModal.init();
   }
 
-  loadArchive(): void {
+  ngAfterViewInit(): void {
+    this.simplemde = new SimpleMDE({ element: document.getElementById("SimpleMDE") });
+    this.resetEditor();
+    this.changeDetector.detectChanges();
+  }
+
+  loadArchive(open?: boolean): void {
+    if (open) {
+      MicroModal.show('selectionModal');
+    }
+
     this.helperService.getJSON('./assets/posts/archive.json').subscribe(data => {
       this.archives = data;
       this.filteredArchives = data;
@@ -32,13 +46,19 @@ export class CanvasComponent implements OnInit {
   }
 
   loadPost(post: string): void {
-    this.helperService.getJSON('./assets/posts/' + post + '.json').subscribe(data => {
-      this.content = data;
-    });
+    this.helperService.getJSON('./assets/posts/' + post + '.json').toPromise()
+      .then(data => this.content = data)
+      .then(() => this.simplemde.value(this.content.postContent));
   }
 
-  savePost(isDraft): void {
+  savePost(isDraft: boolean): void {
     this.content.draft = isDraft;
+
+    if (isDraft) {
+      MicroModal.show('draftModal');
+    } else{
+      MicroModal.show('saveModal');
+    }
 
     if (!this.content.postTitle) {
       this.content.postTitle = 'No title.';
@@ -167,5 +187,6 @@ export class CanvasComponent implements OnInit {
     this.content = new PostModel();
     this.content.postTitle = '';
     this.content.postContent = 'A new post.';
+    this.simplemde.value(this.content.postContent);
   }
 }

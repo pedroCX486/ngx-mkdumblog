@@ -7,7 +7,7 @@ export class HelperService {
   constructor(private httpClient: HttpClient) { }
 
   getConfigs(): Observable<any> {
-    return this.httpClient.get('./assets/configs.json');
+    return this.httpClient.get('./assets/settings.json');
   }
 
   getJSON(arg: string): Observable<any> {
