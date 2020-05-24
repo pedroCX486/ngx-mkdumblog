@@ -23,11 +23,21 @@
     <div>
       <img class="avatar" src="./assets/{{settings.yourAvatar}}"><br>
       <div class="social-networks">
-        <a *ngIf="!!settings.facebook" href="{{settings.facebook}}"><img src="./assets/social/facebook.png"></a>
-        <a *ngIf="!!settings.twitter" href="{{settings.twitter}}"><img src="./assets/social/twitter.png"></a>
-        <a *ngIf="!!settings.instagram" href="{{settings.instagram}}"><img src="./assets/social/instagram.png"></a>
-        <a *ngIf="!!settings.linkedin" href="{{settings.linkedin}}"><img src="./assets/social/linkedin.png"></a>
-        <a *ngIf="!!settings.youtube" href="{{settings.youtube}}"><img src="./assets/social/youtube.png"></a>
+        <a *ngIf="!!settings.facebook" href="{{settings.facebook}}" target="_blank">
+          <img src="./assets/social/facebook.png">
+        </a>
+        <a *ngIf="!!settings.twitter" href="{{settings.twitter}}" target="_blank">
+          <img src="./assets/social/twitter.png">
+        </a>
+        <a *ngIf="!!settings.instagram" href="{{settings.instagram}}" target="_blank">
+          <img src="./assets/social/instagram.png">
+        </a>
+        <a *ngIf="!!settings.linkedin" href="{{settings.linkedin}}" target="_blank">
+          <img src="./assets/social/linkedin.png">
+        </a>
+        <a *ngIf="!!settings.youtube" href="{{settings.youtube}}" target="_blank">
+          <img src="./assets/social/youtube.png">
+        </a>
       </div>
     </div>
     <div class="container">

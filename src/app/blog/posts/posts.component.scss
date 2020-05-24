@@ -1,6 +1,17 @@
-.avatar {max-width: 200px; max-height: 150px; padding-right: 1rem; border-radius: 50%;}
-.profile-box { display: flex !important; text-align: center; padding: 2rem;}
-.social-networks { padding-right: 0.5rem; }
+.avatar {
+    max-width: 200px;
+    max-height: 150px;
+    padding-right: 1rem;
+    border-radius: 50%;
+}
+.profile-box {
+    display: flex !important;
+    text-align: center;
+    padding: 2rem;
+}
+.social-networks {
+    padding-right: 0.5rem;
+}
 
 .placard {
     margin-left: 8rem;
@@ -12,11 +23,17 @@
     margin: 0 auto;
 }
 
-@media (max-width: 544px) {  
-    .display-4{font-size:2rem !important;}
+@media (max-width: 544px) {
+    .placard {
+        margin-left: unset;
+        margin-right: unset;
+    }
+    .placard-title {
+        font-size: 2rem !important;
+    }
 }
 
-.center-block{
+.center-block {
     display: block;
     margin-left: auto;
     margin-right: auto;
