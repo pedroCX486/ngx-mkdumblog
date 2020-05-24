@@ -2,7 +2,7 @@
     <a class="no-focus" href="/">{{settings?.blogTitle}}</a>
     <a href="/" [class.active]="isCurrentPage('/blog')">Home</a>
     <a href="/?page=archives" [class.active]="isCurrentPage('/blog/archives')">Archives</a>
-    <a href="/?page=editor" [class.active]="isCurrentPage('/editor')">Editor</a>
+    <a *ngIf="isProduction" href="/?page=editor" [class.active]="isCurrentPage('/editor')">Editor</a>
     <a href="javascript:void(0);" class="icon" (click)="openMenu()">
         ☰
     </a>
