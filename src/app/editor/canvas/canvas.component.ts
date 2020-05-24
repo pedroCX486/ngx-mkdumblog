@@ -30,7 +30,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.simplemde = new SimpleMDE({ element: document.getElementById("SimpleMDE") });
+    this.simplemde = new SimpleMDE({ element: document.getElementById('SimpleMDE') });
     this.resetEditor();
     this.changeDetector.detectChanges();
   }
@@ -54,7 +54,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
 
   savePost(isDraft: boolean): void {
     this.content.draft = isDraft;
-    
+
     this.content.postContent = this.simplemde.value();
 
     if (isDraft) {

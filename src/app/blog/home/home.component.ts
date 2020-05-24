@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.showdownmd = new showdown.Converter();
-    
+
     this.helperService.getConfigs().toPromise()
       .then((data: SettingsModel) => this.settings = data)
       .then(() => this.loadArchive());
