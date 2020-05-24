@@ -14,7 +14,7 @@ html {
 }
 
 // Animation
-html:not(.fade):not(#SimpleMDE) {
+.card *, .topnav, .placard, button, html:not(.CodeMirror) {
   -webkit-animation: fadein 0.5s;
   animation: fadein 0.5s;
 }
@@ -105,7 +105,7 @@ html:not(.fade):not(#SimpleMDE) {
   display: flex;
 }
 
-.go-right{
+.go-right {
   margin-right: auto;
 }
 

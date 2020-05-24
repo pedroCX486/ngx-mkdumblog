@@ -1,10 +1,10 @@
 {
   "name": "ngx-mkdumblog",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
-    "build": "ng build --prod",
+    "build": "ng lint && ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
