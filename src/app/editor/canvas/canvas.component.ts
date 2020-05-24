@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import { saveAs } from 'file-saver';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { PostModel } from '@shared/models/post.model';
+import { HelperService } from '@shared/services/helper.service';
 
 
 @Component({
@@ -13,34 +11,33 @@ import { PostModel } from '@shared/models/post.model';
 })
 export class CanvasComponent implements OnInit {
 
-  Editor = DecoupledEditor;
   content: PostModel = new PostModel();
   archives = [];
   filteredArchives = [];
   entryExists = false;
 
-  constructor(private http: HttpClient) {
+  constructor(private helperService: HelperService) {
     this.resetEditor();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadArchive();
   }
 
-  loadArchive() {
-    this.getJSON('archive').subscribe(data => {
+  loadArchive(): void {
+    this.helperService.getJSON('./assets/posts/archive.json').subscribe(data => {
       this.archives = data;
       this.filteredArchives = data;
     });
   }
 
-  loadPost(file) {
-    this.getJSON(file).subscribe(data => {
+  loadPost(post: string): void {
+    this.helperService.getJSON('./assets/posts/' + post + '.json').subscribe(data => {
       this.content = data;
     });
   }
 
-  savePost(isDraft) {
+  savePost(isDraft): void {
     this.content.draft = isDraft;
 
     if (!this.content.postTitle) {
@@ -93,7 +90,7 @@ export class CanvasComponent implements OnInit {
     }
   }
 
-  searchArhive(arg, clear?) {
+  searchArhive(arg: string, clear?: boolean): void {
     if (!!arg) {
       this.filteredArchives = this.archives.filter(entry => entry.postTitle.toLowerCase().includes(arg.toLowerCase()));
     } else {
@@ -105,7 +102,7 @@ export class CanvasComponent implements OnInit {
     }
   }
 
-  loadFromFile(fromFile) {
+  loadFromFile(fromFile): void {
     const that = this;
     const file = fromFile.target.files[0];
     const reader = new FileReader();
@@ -142,13 +139,7 @@ export class CanvasComponent implements OnInit {
     }
   }
 
-  resetEditor() {
-    this.content = new PostModel();
-    this.content.postTitle = '';
-    this.content.postContent = 'A new post.';
-  }
-
-  parseFilename() {
+  parseFilename(): string {
     let filename = this.content.postTitle;
 
     filename = filename.replace(/[^a-zA-Z0-9_]+/gi, '-').toLowerCase();
@@ -168,18 +159,13 @@ export class CanvasComponent implements OnInit {
     return filename;
   }
 
-  parseTimestamp(timestamp) {
+  parseTimestamp(timestamp): string {
     return new Date(timestamp * 1000).toUTCString();
   }
 
-  getJSON(arg): Observable<any> {
-    return this.http.get('./assets/posts/' + arg + '.json');
-  }
-
-  editorReady(editor) {
-    editor.ui.getEditableElement().parentElement.insertBefore(
-      editor.ui.view.toolbar.element,
-      editor.ui.getEditableElement()
-    );
+  resetEditor(): void {
+    this.content = new PostModel();
+    this.content.postTitle = '';
+    this.content.postContent = 'A new post.';
   }
 }

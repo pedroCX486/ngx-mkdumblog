@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Settings } from '../../constants/settings'
 import { Router } from '@angular/router';
+import { SettingsModel } from '@shared/models/settings.model';
+import { HelperService } from '@shared/services/helper.service';
 
 
 @Component({
@@ -10,24 +11,25 @@ import { Router } from '@angular/router';
 })
 export class NavigationComponent implements OnInit {
 
-  settings = Settings;
+  settings: SettingsModel;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private helperService: HelperService) {
   }
 
   ngOnInit(): void {
+    this.helperService.getConfigs().subscribe((data: SettingsModel) => this.settings = data);
   }
 
-  openMenu(): void  {
-    var element = document.getElementsByClassName[0]("topnav");
-    if (element.className === "topnav") {
-      element.className += " responsive";
+  openMenu(): void {
+    const element = document.getElementsByClassName[0]('topnav');
+    if (element.className === 'topnav') {
+      element.className += ' responsive';
     } else {
-      element.className = "topnav";
+      element.className = 'topnav';
     }
   }
 
-  isCurrentPage(url) : boolean {
+  isCurrentPage(url: string): boolean {
     return this.router.url === url;
   }
 

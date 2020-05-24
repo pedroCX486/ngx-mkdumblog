@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ArchiveModel } from '@shared/models/archive.model';
 import { PostModel } from '@shared/models/post.model';
-import { Settings } from '@shared/constants/settings';
-
+import { SettingsModel } from '@shared/models/settings.model';
+import { HelperService } from '@shared/services/helper.service';
 
 @Component({
   selector: 'app-home',
@@ -15,28 +15,30 @@ export class HomeComponent implements OnInit {
 
   contents: PostModel[] = [];
   archives: ArchiveModel[] = [];
-  settings = Settings;
+  settings: SettingsModel;
   postsLoaded = 0;
 
-  constructor(private http: HttpClient) {
+  constructor(private helperService: HelperService) {
   }
 
-  ngOnInit() {
-    this.loadArchive();
+  ngOnInit(): void {
+    this.helperService.getConfigs().toPromise()
+      .then((data: SettingsModel) => this.settings = data)
+      .then(() => this.loadArchive());
   }
 
-  loadArchive() {
-    this.getJSON('./assets/posts/archive.json').toPromise().then(data => {
+  loadArchive(): void {
+    this.helperService.getJSON('./assets/posts/archive.json').toPromise().then(data => {
       this.archives = data;
       this.settings.maxPosts = this.archives.length < this.settings.maxPosts ? this.archives.length : this.settings.maxPosts;
-    }).then(data => this.loadPosts());
+    }).then(() => this.loadPosts());
   }
 
-  loadPosts() {
+  loadPosts(): void {
     if (this.postsLoaded < this.settings.maxPosts) {
-      this.getJSON('./assets/posts/' + this.archives[this.postsLoaded].filename + '.json').toPromise().then(data => {
+      this.helperService.getJSON('./assets/posts/' + this.archives[this.postsLoaded].filename + '.json').toPromise().then(data => {
         this.contents.push(data);
-      }).then(data => {
+      }).then(() => {
         this.continue();
       }).catch(error => {
         this.continue(error);
@@ -44,7 +46,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  continue(error?) {
+  continue(error?): void {
     if (error) {
       const errorPost = new PostModel();
       errorPost.postTitle = 'Aw shucks!';
@@ -57,11 +59,7 @@ export class HomeComponent implements OnInit {
     this.loadPosts();
   }
 
-  parseTimestamp(timestamp) {
+  parseTimestamp(timestamp): string {
     return new Date(timestamp * 1000).toUTCString();
-  }
-
-  getJSON(arg): Observable<any> {
-    return this.http.get(arg);
   }
 }

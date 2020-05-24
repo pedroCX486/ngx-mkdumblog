@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { PostModel } from '@shared/models/post.model';
-import { Settings } from '@shared/constants/settings';
+import { SettingsModel } from '@shared/models/settings.model';
+import { HelperService } from '@shared/services/helper.service';
 
 
 @Component({
@@ -15,24 +15,26 @@ export class PostsComponent implements OnInit {
 
   urlParams = new URLSearchParams(window.location.search);
   content: PostModel = new PostModel();
-  settings = new Settings;
+  settings: SettingsModel;
 
-  constructor(private http: HttpClient, private titleService: Title) {
+  constructor(private titleService: Title, private helperService: HelperService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.helperService.getConfigs().subscribe((data: SettingsModel) => this.settings = data);
+
     if (this.urlParams.get('post')) {
       this.loadPost();
     }
   }
 
-  loadPost() {
-    this.getJSON('./assets/posts/' + this.urlParams.get('post') + '.json').toPromise().then(data => {
+  loadPost(): void {
+    this.helperService.getJSON('./assets/posts/' + this.urlParams.get('post') + '.json').toPromise().then(data => {
       this.content = data;
       this.content.timestamp = !!this.content.timestamp ? new Date(data.timestamp * 1000).toUTCString() : '';
       this.content.editedTimestamp = !!this.content.editedTimestamp ? new Date(data.editedTimestamp * 1000).toUTCString() : '';
       this.titleService.setTitle(this.content.postTitle + ' - ' + this.settings.blogTitle);
-    }).then(data => {
+    }).then(() => {
       if (this.settings.enableDisqus) {
         this.loadDisqus();
       }
@@ -42,11 +44,7 @@ export class PostsComponent implements OnInit {
     });
   }
 
-  getJSON(arg): Observable<any> {
-    return this.http.get(arg);
-  }
-
-  loadDisqus() {
+  loadDisqus(): void {
     const body = document.body as HTMLDivElement;
     const script = document.createElement('script');
     script.innerHTML = '';

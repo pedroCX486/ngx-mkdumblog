@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { Settings } from '@shared/constants/settings';
+import { HelperService } from '@shared/services/helper.service';
+import { SettingsModel } from '@shared/models/settings.model';
 
 
 @Component({
@@ -12,13 +13,15 @@ import { Settings } from '@shared/constants/settings';
 
 export class AppComponent implements OnInit {
 
-  settings = new Settings;
+  settings: SettingsModel;
   urlParams = new URLSearchParams(window.location.search);
 
-  constructor(private titleService: Title, private router: Router) {
+  constructor(private titleService: Title, private router: Router, private helperService: HelperService) {
   }
 
   ngOnInit() {
+
+    this.helperService.getConfigs().subscribe((data: SettingsModel) => this.settings = data);
     this.titleService.setTitle(this.settings.blogTitle);
 
     if (this.urlParams.get('post')) {
