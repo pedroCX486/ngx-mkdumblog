@@ -14,7 +14,7 @@ html {
 }
 
 // Animation
-*:not(.fade) {
+html:not(.fade):not(#SimpleMDE) {
   -webkit-animation: fadein 0.5s;
   animation: fadein 0.5s;
 }
