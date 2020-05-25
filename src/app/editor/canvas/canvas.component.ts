@@ -49,7 +49,9 @@ export class CanvasComponent implements OnInit, AfterViewInit {
   loadPost(post: string): void {
     this.helperService.getJSON('./assets/posts/' + post + '.json').toPromise()
       .then(data => this.content = data)
-      .then(() => this.simplemde.value(this.content.postContent));
+      .then(() => this.simplemde.value(this.content.postContent))
+      .then(() => MicroModal.close('selectionModal'))
+      .catch(() => alert('Error loading post! Do you have an working internet connection?'));
   }
 
   savePost(isDraft: boolean): void {
@@ -142,18 +144,17 @@ export class CanvasComponent implements OnInit, AfterViewInit {
       try {
         if (Object.keys(JSON.parse(contents.toString())).toString() === Object.keys(that.content).toString()) {
           that.content = JSON.parse(contents.toString());
+          that.simplemde.value(that.content.postContent);
+          MicroModal.close('selectionModal');
         } else {
           alert('Invalid file! Are you sure it\'s an Dumblog compatible JSON?');
           error = true;
-          return;
         }
       } catch (e) {
         alert('Invalid file! Are you sure it\'s an Dumblog compatible JSON?');
         error = true;
-        return;
       }
 
-      document.getElementById('dismiss').click();
       (document.getElementById('file-input') as HTMLInputElement).value = '';
     });
 

@@ -42,7 +42,7 @@
           <div class="card">
             <div class="list-group">
               <div class="mouse-hover list-item" *ngFor="let archive of filteredArchives"
-                (click)="loadPost(archive.filename)" data-micromodal-close>
+                (click)="loadPost(archive.filename)">
                 {{archive.postTitle}}
               </div>
             </div>
