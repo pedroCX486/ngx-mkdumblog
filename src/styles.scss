@@ -1,4 +1,4 @@
-// Body sizing
+// Body Sizing
 body {
   margin-top: 4rem;
   margin-left: 0.5em;
@@ -137,7 +137,6 @@ textarea {
 }
 
 // Buttons
-
 button {
   cursor: pointer;
 }
@@ -206,4 +205,21 @@ button:hover {
 .placard-title {
   font-weight: 200;
   font-size: 3.5rem;
+}
+
+// Editor Settings
+.CodeMirror,
+.CodeMirror-scroll {
+  max-height: 400px;
+  min-height: 400px !important;
+}
+
+.CodeMirror-fullscreen.CodeMirror {
+  max-height: none;
+  min-height: none;
+}
+
+.CodeMirror-fullscreen .CodeMirror-scroll {
+  max-height: none;
+  min-height: none;
 }
