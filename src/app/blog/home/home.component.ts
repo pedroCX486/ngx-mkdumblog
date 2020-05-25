@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { ArchiveModel } from '@shared/models/archive.model';
 import { PostModel } from '@shared/models/post.model';
 import { SettingsModel } from '@shared/models/settings.model';

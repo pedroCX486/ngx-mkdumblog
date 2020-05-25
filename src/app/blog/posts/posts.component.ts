@@ -24,11 +24,14 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.showdownmd = new showdown.Converter();
-    this.helperService.getConfigs().subscribe((data: SettingsModel) => this.settings = data);
 
-    if (this.urlParams.get('post')) {
-      this.loadPost();
-    }
+    this.helperService.getConfigs().toPromise()
+      .then((data: SettingsModel) => this.settings = data)
+      .then(() => {
+        if (this.urlParams.get('post')) {
+          this.loadPost();
+        }
+      });
   }
 
   loadPost(): void {
@@ -43,7 +46,7 @@ export class PostsComponent implements OnInit {
       }
     }).catch(error => {
       this.content.postTitle = 'Whoops!';
-      this.content.postContent = 'We couldn\'t load this post! <strong>(' + error.status + ' ' + error.statusText + ')</strong>';
+      this.content.postContent = 'We couldn\'t load this post! <strong>(' + error.status + ')</strong>';
     });
   }
 
