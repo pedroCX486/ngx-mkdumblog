@@ -14,7 +14,11 @@ html {
 }
 
 // Animation
-.card *, .topnav, .placard, button, html:not(.CodeMirror) {
+.card *,
+.topnav *,
+.placard *,
+button,
+html:not(.CodeMirror) {
   -webkit-animation: fadein 0.5s;
   animation: fadein 0.5s;
 }
