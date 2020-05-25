@@ -151,7 +151,8 @@ export class CanvasComponent implements OnInit, AfterViewInit {
           error = true;
         }
       } catch (e) {
-        alert('Invalid file! Are you sure it\'s an Dumblog compatible JSON?');
+        alert('Error loading file! Check the console for more info.');
+        console.log(e);
         error = true;
       }
 
