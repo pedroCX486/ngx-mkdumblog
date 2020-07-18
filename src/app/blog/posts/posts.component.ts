@@ -25,7 +25,7 @@ export class PostsComponent implements OnInit {
   ngOnInit(): void {
     this.showdownmd = new showdown.Converter();
 
-    this.helperService.getConfigs().toPromise()
+    this.helperService.getSettings().toPromise()
       .then((data: SettingsModel) => this.settings = data)
       .then(() => {
         if (this.urlParams.get('post')) {
@@ -37,8 +37,8 @@ export class PostsComponent implements OnInit {
   loadPost(): void {
     this.helperService.getJSON('./assets/posts/' + this.urlParams.get('post') + '.json').toPromise().then(data => {
       this.content = data;
-      this.content.timestamp = !!this.content.timestamp ? new Date(data.timestamp * 1000).toUTCString() : '';
-      this.content.editedTimestamp = !!this.content.editedTimestamp ? new Date(data.editedTimestamp * 1000).toUTCString() : '';
+      this.content.timestamp = !!this.content.timestamp ? this.helperService.parseTimestamp(data.timestamp) : '';
+      this.content.editedTimestamp = !!this.content.editedTimestamp ? this.helperService.parseTimestamp(data.editedTimestamp) : '';
       this.titleService.setTitle(this.content.postTitle + ' - ' + this.settings.blogTitle);
     }).then(() => {
       if (this.settings.enableDisqus) {

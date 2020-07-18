@@ -4,11 +4,11 @@
   <textarea id="SimpleMDE" [(ngModel)]="content.postContent"></textarea>
 
   <div class="timestamp text-muted" *ngIf="!!content.timestamp">
-    <strong>Created on</strong>&nbsp;{{parseTimestamp(content.timestamp)}}
+    <strong>Created on</strong>&nbsp;{{helperService.parseTimestamp(content.timestamp)}}
   </div>
 
   <div class="timestamp text-muted" *ngIf="!!content.editedTimestamp">
-    <strong>Last Edited on</strong>&nbsp;{{parseTimestamp(content.editedTimestamp)}}
+    <strong>Last Edited on</strong>&nbsp;{{helperService.parseTimestamp(content.editedTimestamp)}}
   </div>
 
   <div class="controls">

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { saveAs } from 'file-saver';
 import { PostModel } from '@shared/models/post.model';
 import { HelperService } from '@shared/services/helper.service';
@@ -20,7 +20,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
   filteredArchives = [];
   entryExists = false;
 
-  constructor(private helperService: HelperService, private changeDetector: ChangeDetectorRef) {
+  constructor(public helperService: HelperService, private changeDetector: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -85,9 +85,9 @@ export class CanvasComponent implements OnInit, AfterViewInit {
       this.content.filename = this.parseFilename();
 
       if (!this.content.timestamp) {
-        this.content.timestamp = Math.round((new Date()).getTime() / 1000).toString();
+        this.content.timestamp = this.helperService.generateTimestamp();
       } else {
-        this.content.editedTimestamp = Math.round((new Date()).getTime() / 1000).toString();
+        this.content.editedTimestamp = this.helperService.generateTimestamp();
       }
 
       saveAs(new Blob(
@@ -99,7 +99,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
       if (!this.archives.some((post => post.postTitle === that.content.postTitle))) {
         this.archives.unshift({
           postTitle: this.content.postTitle,
-          timestamp: Math.round((new Date()).getTime() / 1000).toString(),
+          timestamp: this.helperService.generateTimestamp(),
           filename: this.parseFilename()
         });
 
@@ -166,7 +166,6 @@ export class CanvasComponent implements OnInit, AfterViewInit {
 
   parseFilename(): string {
     let filename = this.content.postTitle;
-
     filename = filename.replace(/[^a-zA-Z0-9_]+/gi, '-').toLowerCase();
 
     while (filename.endsWith('-')) {
@@ -182,10 +181,6 @@ export class CanvasComponent implements OnInit, AfterViewInit {
     }
 
     return filename;
-  }
-
-  parseTimestamp(timestamp): string {
-    return new Date(timestamp * 1000).toUTCString();
   }
 
   resetEditor(): void {

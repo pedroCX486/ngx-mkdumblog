@@ -19,13 +19,13 @@ export class HomeComponent implements OnInit {
 
   showdownmd;
 
-  constructor(private helperService: HelperService) {
+  constructor(public helperService: HelperService) {
   }
 
   ngOnInit(): void {
     this.showdownmd = new showdown.Converter();
 
-    this.helperService.getConfigs().toPromise()
+    this.helperService.getSettings().toPromise()
       .then((data: SettingsModel) => this.settings = data)
       .then(() => this.loadArchive());
   }
@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  continue(error?): void {
+  continue(error?: any): void {
     if (error) {
       const errorPost = new PostModel();
       errorPost.postTitle = 'Aw shucks!';
@@ -64,9 +64,5 @@ export class HomeComponent implements OnInit {
 
   generateHTML(markdown: string): void {
     return this.showdownmd.makeHtml(markdown);
-  }
-
-  parseTimestamp(timestamp): string {
-    return new Date(timestamp * 1000).toUTCString();
   }
 }

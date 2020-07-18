@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { SettingsModel } from '@shared/models/settings.model';
 import { HelperService } from '@shared/services/helper.service';
 import { environment } from '@env/environment';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -13,15 +14,19 @@ import { environment } from '@env/environment';
 export class NavigationComponent implements OnInit {
 
   settings: SettingsModel;
-  isProduction;
+  isProduction = environment.production;
 
-  constructor(private router: Router, private helperService: HelperService) {
+  constructor(private router: Router, private helperService: HelperService, private titleService: Title) {
   }
 
   ngOnInit(): void {
-    this.helperService.getConfigs().subscribe((data: SettingsModel) => this.settings = data);
+    this.initialize();
+  }
 
-    this.isProduction = environment.production;
+  initialize(): void {
+    this.helperService.getSettings().toPromise()
+      .then((data: SettingsModel) => this.settings = data)
+      .then(() => this.titleService.setTitle(this.settings.blogTitle));
   }
 
   openMenu(): void {

@@ -16,15 +16,14 @@ export class AppComponent implements OnInit {
   settings: SettingsModel;
   urlParams = new URLSearchParams(window.location.search);
 
-  constructor(private titleService: Title, private router: Router, private helperService: HelperService) {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
+    this.navigate();
+  }
 
-    this.helperService.getConfigs().toPromise()
-      .then((data: SettingsModel) => this.settings = data)
-      .then(() => this.titleService.setTitle(this.settings.blogTitle));
-
+  navigate(): void {
     if (this.urlParams.get('post')) {
       this.router.navigate(['/blog/posts'], { queryParams: { post: this.urlParams.get('post') }, skipLocationChange: true });
     } else {
@@ -40,10 +39,6 @@ export class AppComponent implements OnInit {
           break;
       }
     }
-  }
-
-  navigate(arg) {
-    this.router.navigate([arg], { skipLocationChange: true });
   }
 
 }
