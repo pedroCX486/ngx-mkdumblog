@@ -1,6 +1,6 @@
 # ngx-mkdumblog
 
-The new version of [ngx-dumblog](https://github.com/pedroCX486/ngx-dumblog), now with Markdown support! Now you have an full-fledged markdown online editor (just for editing, it can't save the files to your repo), with customization on the settings.json file, lightweight size (no bootstrap!) and much more!
+Alternate version of [ngx-dumblog](https://github.com/pedroCX486/ngx-dumblog), with Markdown support! You have a full-fledged markdown online editor (just for editing, it can't save the files to your repo), with customization on the settings.json file, lightweight size (no bootstrap!) and more.
 
 ## Customizations
 
